@@ -1,5 +1,5 @@
 set CUR_DIR=%cd%
-set DIR=%SystemRoot%\system32\grouppolicy\User\Scripts
+set DIR=%SystemRoot%\System32\GroupPolicy\User\Scripts
 
 set FILE=%DIR%\Logon\in.bat
 echo set DIR=%%UserProfile%%\Documents\WorkingTable> %FILE%
