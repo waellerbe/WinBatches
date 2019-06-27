@@ -1,7 +1,7 @@
 set CUR_DIR=%cd%
 set DIR=%SystemRoot%\System32\GroupPolicy\User\Scripts
 
-set FILE=%DIR%\Logon\in.bat
+set FILE=%DIR%\Logon\logon.bat
 echo set DIR=%%UserProfile%%\Documents\WorkingTable> %FILE%
 echo md %%DIR%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable.txt>> %FILE%
@@ -14,7 +14,7 @@ echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
 echo echo In: "%%DATA%%"^>^> %%FILE%%>> %FILE%
 
-set FILE=%DIR%\Logoff\out.bat
+set FILE=%DIR%\Logoff\logoff.bat
 echo set DIR=%%UserProfile%%\Documents\WorkingTable> %FILE%
 echo md %%DIR%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable.txt>> %FILE%
