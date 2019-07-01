@@ -12,7 +12,7 @@ echo set CUR_HH=%%time:~0,2%%>> %FILE%
 echo set CUR_II=%%time:~3,2%%>> %FILE%
 echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
-echo echo In: "%%DATA%%"^>^> %%FILE%%>> %FILE%
+echo echo Logged in: "%%DATA%%"^>^> %%FILE%%>> %FILE%
 
 set FILE=%DIR%\Logoff\logoff.bat
 echo set DIR=%%UserProfile%%\Documents\WorkingTable> %FILE%
@@ -25,5 +25,5 @@ echo set CUR_HH=%%time:~0,2%%>> %FILE%
 echo set CUR_II=%%time:~3,2%%>> %FILE%
 echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
-echo echo Out: "%%DATA%%"^>^> %%FILE%%>> %FILE%
+echo echo Logged out: "%%DATA%%"^>^> %%FILE%%>> %FILE%
 echo echo ----------------------------^>^> %%FILE%%>> %FILE%
