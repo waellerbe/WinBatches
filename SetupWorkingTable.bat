@@ -26,4 +26,4 @@ echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable_%%CUR_YYYY%%-%%CUR_MM%%.txt>> %FILE%
 echo echo Leaving: "%%DATA%%"^>^> %%FILE%%>> %FILE%
-echo echo --------------------------------^>^> %%FILE%%>> %FILE%
+echo echo -------------------------------^>^> %%FILE%%>> %FILE%
