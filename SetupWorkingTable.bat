@@ -1,3 +1,5 @@
+::WorkingTable script ver:1.0
+@echo off
 set CUR_DIR=%cd%
 set DIR=%SystemRoot%\System32\GroupPolicy\User\Scripts
 
@@ -12,7 +14,12 @@ echo set CUR_II=%%time:~3,2%%>> %FILE%
 echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable_%%CUR_YYYY%%-%%CUR_MM%%.txt>> %FILE%
-echo echo Coming: "%%DATA%%"^>^> %%FILE%%>> %FILE%
+echo for /F "tokens=3 delims=/," %%%%G in (%%FILE%%) do set DAY=%%%%G>> %FILE%
+echo if [%%DAY%%]==[%%CUR_DD%%] (>> %FILE%
+echo   echo Already recorded>> %FILE%
+echo ) else (>> %FILE%
+echo   echo Coming: "%%DATA%%"^>^> %%FILE%%>> %FILE%
+echo )>> %FILE%
 
 set FILE=%DIR%\Logoff\logoff.bat
 echo set DIR=%%UserProfile%%\Documents\WorkingTable> %FILE%
@@ -25,5 +32,10 @@ echo set CUR_II=%%time:~3,2%%>> %FILE%
 echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable_%%CUR_YYYY%%-%%CUR_MM%%.txt>> %FILE%
-echo echo Leaving: "%%DATA%%"^>^> %%FILE%%>> %FILE%
-echo echo -------------------------------^>^> %%FILE%%>> %FILE%
+echo for /F "tokens=3 delims=/," %%%%G in (%%FILE%%) do set DAY=%%%%G>> %FILE%
+echo if [%%DAY%%]==[%%CUR_DD%%] (>> %FILE%
+echo   echo Already recorded>> %FILE%
+echo ) else (>> %FILE%
+echo   echo Leaving: "%%DATA%%"^>^> %%FILE%%>> %FILE%
+echo   echo -------------------------------^>^> %%FILE%%>> %FILE%
+echo )>> %FILE%
