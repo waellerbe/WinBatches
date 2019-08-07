@@ -39,3 +39,27 @@ echo ) else (>> %FILE%
 echo   echo Leaving: "%%DATA%%"^>^> %%FILE%%>> %FILE%
 echo   echo -------------------------------^>^> %%FILE%%>> %FILE%
 echo )>> %FILE%
+
+set REG_LOGON=HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logon
+reg add "%REG_LOGON%\0" /V DisplayName /T REG_SZ /d "Local Group Policy" /f
+reg add "%REG_LOGON%\0" /V GPOName /T REG_SZ /d "Local Group Policy" /f
+reg add "%REG_LOGON%\0" /V FileSysPath /T REG_SZ /d "%DIR%" /f
+reg add "%REG_LOGON%\0" /V SOM-ID /T REG_SZ /d "Local" /f
+reg add "%REG_LOGON%\0" /V GPO-ID /T REG_SZ /d "LocalGPO" /f
+reg add "%REG_LOGON%\0" /V PSScriptOrder /T REG_DWORD /d 1 /f
+reg add "%REG_LOGON%\0\0" /V Parameters /T REG_SZ /d "" /f
+reg add "%REG_LOGON%\0\0" /V Script /T REG_SZ /d "logon.bat" /f
+reg add "%REG_LOGON%\0\0" /V IsPowershell /T REG_DWORD /d 0 /f
+reg add "%REG_LOGON%\0\0" /V ExecTime /T REG_QWORD /d 0 /f
+
+set REG_LOGOFF=HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logoff
+reg add "%REG_LOGOFF%\0" /V DisplayName /T REG_SZ /d "Local Group Policy" /f
+reg add "%REG_LOGOFF%\0" /V GPOName /T REG_SZ /d "Local Group Policy" /f
+reg add "%REG_LOGOFF%\0" /V FileSysPath /T REG_SZ /d "%DIR%" /f
+reg add "%REG_LOGOFF%\0" /V SOM-ID /T REG_SZ /d "Local" /f
+reg add "%REG_LOGOFF%\0" /V GPO-ID /T REG_SZ /d "LocalGPO" /f
+reg add "%REG_LOGOFF%\0" /V PSScriptOrder /T REG_DWORD /d 1 /f
+reg add "%REG_LOGOFF%\0\0" /V Parameters /T REG_SZ /d "" /f
+reg add "%REG_LOGOFF%\0\0" /V Script /T REG_SZ /d "logoff.bat" /f
+reg add "%REG_LOGOFF%\0\0" /V IsPowershell /T REG_DWORD /d 0 /f
+reg add "%REG_LOGOFF%\0\0" /V ExecTime /T REG_QWORD /d 0 /f
