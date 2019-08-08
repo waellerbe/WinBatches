@@ -51,7 +51,7 @@ reg add "%REG_LOGON%\0" /V GPO-ID /T REG_SZ /d "LocalGPO" /f
 reg add "%REG_LOGON%\0" /V PSScriptOrder /T REG_DWORD /d 1 /f
 reg add "%REG_LOGON%\0\0" /V Parameters /T REG_SZ /d "" /f
 reg add "%REG_LOGON%\0\0" /V Script /T REG_SZ /d "logon.bat" /f
-reg add "%REG_LOGON%\0\0" /V IsPowershell /T REG_DWORD /d 0 /f
+reg add "%REG_LOGON%\0\0" /V IsPowershell /T REG_DWORD /d 1 /f
 reg add "%REG_LOGON%\0\0" /V ExecTime /T REG_QWORD /d 0 /f
 
 set REG_LOGOFF=HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logoff
@@ -63,16 +63,23 @@ reg add "%REG_LOGOFF%\0" /V GPO-ID /T REG_SZ /d "LocalGPO" /f
 reg add "%REG_LOGOFF%\0" /V PSScriptOrder /T REG_DWORD /d 1 /f
 reg add "%REG_LOGOFF%\0\0" /V Parameters /T REG_SZ /d "" /f
 reg add "%REG_LOGOFF%\0\0" /V Script /T REG_SZ /d "logoff.bat" /f
-reg add "%REG_LOGOFF%\0\0" /V IsPowershell /T REG_DWORD /d 0 /f
+reg add "%REG_LOGOFF%\0\0" /V IsPowershell /T REG_DWORD /d 1 /f
 reg add "%REG_LOGOFF%\0\0" /V ExecTime /T REG_QWORD /d 0 /f
 
-echo .>>%DIR%\scripts.ini
-echo [Logon]>>%DIR%\scripts.ini
-echo 0CmdLine=logon.bat>>%DIR%\scripts.ini
-echo 0Parameters=>>%DIR%\scripts.ini
-echo .>>%DIR%\scripts.ini
-echo [Logoff]>>%DIR%\scripts.ini
-echo 0CmdLine=logoff.bat>>%DIR%\scripts.ini
-echo 0Parameters=>>%DIR%\scripts.ini
-echo .>>%DIR%\scripts.ini
+for /F "tokens=2 delims==." %%G in ('FINDSTR /C:"logon.bat" %DIR%\scripts.ini') do set GPOLogon=%%G
+if [%GPOLogon%]==[logon] (
+  echo Already recorded
+) else (
+  echo [Logon]>>%DIR%\scripts.ini
+  echo 0CmdLine=logon.bat>>%DIR%\scripts.ini
+  echo 0Parameters=>>%DIR%\scripts.ini
+)
+for /F "tokens=2 delims==." %%G in ('FINDSTR /C:"logoff.bat" %DIR%\scripts.ini') do set GPOLogoff=%%G
+if [%GPOLogoff%]==[logoff] (
+  echo Already recorded
+) else (
+  echo [Logoff]>>%DIR%\scripts.ini
+  echo 0CmdLine=logoff.bat>>%DIR%\scripts.ini
+  echo 0Parameters=>>%DIR%\scripts.ini
+)
 ::gpedit.msc
