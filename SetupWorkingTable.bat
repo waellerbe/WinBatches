@@ -42,6 +42,8 @@ echo   echo -------------------------------^>^> %%FILE%%>> %FILE%
 echo )>> %FILE%
 ::schtasks /create /SC ONLOGOFF /TN "RunWorkingTableLogoff" /TR "%FILE%"
 
+goto :continue
+
 set REG_LOGON=HKCU\Software\Microsoft\Windows\CurrentVersion\Group Policy\Scripts\Logon
 reg add "%REG_LOGON%\0" /V DisplayName /T REG_SZ /d "Local Group Policy" /f
 reg add "%REG_LOGON%\0" /V GPOName /T REG_SZ /d "Local Group Policy" /f
@@ -82,4 +84,6 @@ if [%GPOLogoff%]==[logoff] (
   echo 0CmdLine=logoff.bat>>%DIR%\scripts.ini
   echo 0Parameters=>>%DIR%\scripts.ini
 )
-::gpedit.msc
+
+:continue
+gpedit.msc
