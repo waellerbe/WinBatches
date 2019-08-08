@@ -14,12 +14,12 @@ echo set CUR_II=%%time:~3,2%%>> %FILE%
 echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable_%%CUR_YYYY%%-%%CUR_MM%%.txt>> %FILE%
-echo for /F "tokens=3 delims=/," %%%%G in ('FINDSTR /C:"Coming" %%FILE%%') do set DAY=%%%%G>> %FILE%
-echo if [%%DAY%%]==[%%CUR_DD%%] (>> %FILE%
-echo   echo Already recorded>> %FILE%
-echo ) else (>> %FILE%
+::echo for /F "tokens=3 delims=/," %%%%G in ('FINDSTR /C:"Coming" %%FILE%%') do set DAY=%%%%G>> %FILE%
+::echo if [%%DAY%%]==[%%CUR_DD%%] (>> %FILE%
+::echo   echo Already recorded>> %FILE%
+::echo ) else (>> %FILE%
 echo   echo Coming: "%%DATA%%"^>^> %%FILE%%>> %FILE%
-echo )>> %FILE%
+::echo )>> %FILE%
 ::schtasks /create /SC ONLOGON /TN "RunWorkingTableLogon" /TR "%FILE%"
 
 set FILE=%DIR%\Logoff\logoff.bat
@@ -33,13 +33,13 @@ echo set CUR_II=%%time:~3,2%%>> %FILE%
 echo set CUR_SS=%%time:~6,2%%>> %FILE%
 echo set DATA=%%CUR_YYYY%%/%%CUR_MM%%/%%CUR_DD%%, %%CUR_HH%%:%%CUR_II%%:%%CUR_SS%%>> %FILE%
 echo set FILE=%%DIR%%\WorkingTable_%%CUR_YYYY%%-%%CUR_MM%%.txt>> %FILE%
-echo for /F "tokens=3 delims=/," %%%%G in ('FINDSTR /C:"Leaving" %%FILE%%') do set DAY=%%%%G>> %FILE%
-echo if [%%DAY%%]==[%%CUR_DD%%] (>> %FILE%
-echo   echo Already recorded>> %FILE%
-echo ) else (>> %FILE%
+::echo for /F "tokens=3 delims=/," %%%%G in ('FINDSTR /C:"Leaving" %%FILE%%') do set DAY=%%%%G>> %FILE%
+::echo if [%%DAY%%]==[%%CUR_DD%%] (>> %FILE%
+::echo   echo Already recorded>> %FILE%
+::echo ) else (>> %FILE%
 echo   echo Leaving: "%%DATA%%"^>^> %%FILE%%>> %FILE%
 echo   echo -------------------------------^>^> %%FILE%%>> %FILE%
-echo )>> %FILE%
+::echo )>> %FILE%
 ::schtasks /create /SC ONLOGOFF /TN "RunWorkingTableLogoff" /TR "%FILE%"
 
 goto :continue
